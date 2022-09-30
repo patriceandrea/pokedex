@@ -1,10 +1,14 @@
-
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Pokedex from "./Pokedex";
+import Pokemon from "./Pokemon";
 
 function App() {
   return (
-    <div className="App">
-      App
-    </div>
+    <Switch>
+      <Route exact path="/" render={(props) => <Pokedex {...props} />} />
+      <Route exact path="/:pokemonId" render={(props) => <Pokemon {...props} />} />
+    </Switch>
   );
 }
 
