@@ -5,7 +5,9 @@ const Pokemon = ({ match }) => {
   const { pokemonId } = params;
 
   return (
-    <div>{`This is a Pokemon page for pokemon #${pokemonId}`}</div>
+    <div>
+      {`This is a Pokemon page for pokemon #${pokemonId}`}
+    </div>
   )
 }
 
