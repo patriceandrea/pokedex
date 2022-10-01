@@ -1,6 +1,9 @@
 import React from "react";
 import { AppBar, Toolbar, Grid, Card, CardMedia, CardContent } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles'
+import mockData from "./mockData";
+import { useState } from "react";
+import { CircularProgress } from "material-ui";
 
 const useStyles = makeStyles({
   pokedexContainer: {
@@ -10,30 +13,37 @@ const useStyles = makeStyles({
   }
 })
 
-const getPokemonCard = () => {
-  return (
-    <Grid item xs={4} sm={4}>
-      <Card>
-        <CardContent>HI</CardContent>
-      </Card>
-    </Grid>
-  )
-};
-
 const Pokedex = () => {
   const classes = useStyles();
+  const [pokemonData, setPokemonData] = useState(mockData);
+  const { id, name } = pokemonData[pokemonId];
+
+  const getPokemonCard = (pokemonId) => {
+    console.log(pokemonData[`${pokemonId}`])
+    return (
+      <Grid item xs={4} sm={4} key={pokemonId}>
+        <Card>
+          <CardContent>HI</CardContent>
+        </Card>
+      </Grid>
+    )
+  };
 
   return (
     <>
       <AppBar position="static">
         <Toolbar />
       </AppBar>
-      <Grid container spacing={2} className={classes.pokedexContainer}>
-        {getPokemonCard()}
-        {getPokemonCard()}
-        {getPokemonCard()}
-        {getPokemonCard()}
-      </Grid>
+      {pokemonData ? (
+        <Grid container spacing={2} className={classes.pokedexContainer}>
+          {Object.keys(pokemonData).map((pokemonId) =>
+            getPokemonCard(pokemonId)
+          )}
+        </Grid>
+      ) : (
+        <CircularProgress />
+      )}
+
     </>
   )
 }
