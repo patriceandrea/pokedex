@@ -1,5 +1,5 @@
 import React from "react";
-import { AppBar, Toolbar, Grid, Card, CardMedia, CardContent } from "@material-ui/core";
+import { AppBar, Toolbar, Grid, Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles'
 import mockData from "./mockData";
 import { useState } from "react";
@@ -10,20 +10,39 @@ const useStyles = makeStyles({
     paddingTop: '20px',
     paddingLeft: '50px',
     paddingRight: '50px'
+  },
+  cardMedia: {
+    margin: 'auto'
+  },
+  cardContent: {
+    textAlign: "center",
   }
 })
 
-const Pokedex = () => {
+const toFirstCharUppercase = (name) => {
+  return name.charAt(0).toUpperCase() + name.slice(1);
+};
+
+const Pokedex = (pokemonId) => {
   const classes = useStyles();
   const [pokemonData, setPokemonData] = useState(mockData);
-  const { id, name } = pokemonData[pokemonId];
+
 
   const getPokemonCard = (pokemonId) => {
-    console.log(pokemonData[`${pokemonId}`])
+    const { id, name } = pokemonData[`${pokemonId}`];
+    const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+
     return (
       <Grid item xs={4} sm={4} key={pokemonId}>
         <Card>
-          <CardContent>HI</CardContent>
+          <CardMedia
+            className={classes.CardMedia}
+            image={sprite}
+            style={{ widht: "130px", height: "130px" }}
+          />
+          <CardContent className={classes.cardContent}>
+            <Typography>{`${id}. ${toFirstCharUppercase(name)}`}</Typography>
+          </CardContent>
         </Card>
       </Grid>
     )
