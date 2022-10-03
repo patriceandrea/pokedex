@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import mockData from "./mockData";
 import { useState } from "react";
 import { CircularProgress } from "material-ui";
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles({
   pokedexContainer: {
@@ -23,9 +24,11 @@ const toFirstCharUppercase = (name) => {
   return name.charAt(0).toUpperCase() + name.slice(1);
 };
 
-const Pokedex = (pokemonId) => {
+const Pokedex = () => {
+  const history = useHistory()
   const classes = useStyles();
   const [pokemonData, setPokemonData] = useState(mockData);
+
 
 
   const getPokemonCard = (pokemonId) => {
@@ -34,7 +37,7 @@ const Pokedex = (pokemonId) => {
 
     return (
       <Grid item xs={4} sm={4} key={pokemonId}>
-        <Card>
+        <Card onClick={() => history.push(`/${pokemonId}`)}>
           <CardMedia
             className={classes.CardMedia}
             image={sprite}
