@@ -1,14 +1,12 @@
 import React from 'react'
-import mockData from './mockData';
 import { useState } from 'react';
-import { Typography } from '@material-ui/core';
+import { Button, CircularProgress, Typography } from '@material-ui/core';
 import { toFirstCharUppercase } from "./constants"
 import { Link } from 'react-router-dom';
 
-const Pokemon = ({ match }) => {
+const Pokemon = ({ match, history }) => {
   const { params } = match;
-  const { pokemonId } = params;
-  const [pokemon, setPokemon] = useState({});
+  const [pokemon, setPokemon] = useState(undefined);
 
 
   const generatePokemonJSX = () => {
@@ -45,7 +43,14 @@ const Pokemon = ({ match }) => {
 
   return (
     <>
-      {generatePokemonJSX()}
+      {pokemon === undefined && <CircularProgress />}
+      {pokemon != undefined && pokemon && generatePokemonJSX(pokemon)}
+      {pokemon === false && <Typography> Pokemon Not Found </Typography>}
+      {pokemon !== undefined &&
+        <Button variant="contained" onClick={() => history.push("/")}>
+          Back To Pokedex
+        </Button>
+      }
     </>
   )
 }
