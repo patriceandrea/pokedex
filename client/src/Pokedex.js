@@ -1,7 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Grid, Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles'
-import mockData from "./mockData";
 import { useState, useEffect } from "react";
 import { CircularProgress } from "material-ui";
 import { toFirstCharUppercase } from "./constants";
@@ -34,14 +33,21 @@ const Pokedex = (props) => {
         const { data } = response;
         const { results } = data;
         const newPokemonData = {};
-      })
-      ;
+        results.forEach((pokemon, index) => {
+          newPokemonData[index + 1] = {
+            id: index + 1,
+            name: pokemon.name,
+            sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1
+              }.png`
+          };
+        })
+        setPokemonData(newPokemonData);
+      });
   }, []);
 
 
   const getPokemonCard = (pokemonId) => {
-    const { id, name } = pokemonData[`${pokemonId}`];
-    const sprite = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`;
+    const { id, name, sprite } = pokemonData[`${pokemonId}`]
 
     return (
       <Grid item xs={4} sm={4} key={pokemonId}>
