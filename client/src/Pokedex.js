@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import mockData from "./mockData";
 import { useState } from "react";
 import { CircularProgress } from "material-ui";
-import { useHistory } from "react-router-dom";
+import { toFirstCharUppercase } from "./constants";
 
 const useStyles = makeStyles({
   pokedexContainer: {
@@ -20,12 +20,9 @@ const useStyles = makeStyles({
   }
 })
 
-const toFirstCharUppercase = (name) => {
-  return name.charAt(0).toUpperCase() + name.slice(1);
-};
 
-const Pokedex = () => {
-  const history = useHistory()
+const Pokedex = (props) => {
+  const { history } = props;
   const classes = useStyles();
   const [pokemonData, setPokemonData] = useState(mockData);
 
