@@ -2,9 +2,10 @@ import React from "react";
 import { AppBar, Toolbar, Grid, Card, CardMedia, CardContent, Typography } from "@material-ui/core";
 import { makeStyles } from '@material-ui/core/styles'
 import mockData from "./mockData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CircularProgress } from "material-ui";
 import { toFirstCharUppercase } from "./constants";
+import axios from 'axios';
 
 const useStyles = makeStyles({
   pokedexContainer: {
@@ -24,8 +25,18 @@ const useStyles = makeStyles({
 const Pokedex = (props) => {
   const { history } = props;
   const classes = useStyles();
-  const [pokemonData, setPokemonData] = useState(mockData);
+  const [pokemonData, setPokemonData] = useState({});
 
+  useEffect(() => {
+    axios
+      .get(`https://pokeapi.co/api/v2/pokemon?limit=870`)
+      .then(function (response) {
+        const { data } = response;
+        const { results } = data;
+        const newPokemonData = {};
+      })
+      ;
+  }, []);
 
 
   const getPokemonCard = (pokemonId) => {

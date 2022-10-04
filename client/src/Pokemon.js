@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const Pokemon = ({ match }) => {
   const { params } = match;
   const { pokemonId } = params;
-  const [pokemon, setPokemon] = useState(mockData[`${pokemonId}`]);
+  const [pokemon, setPokemon] = useState({});
 
 
   const generatePokemonJSX = () => {
