@@ -42,6 +42,11 @@ const Pokedex = (props) => {
   const { history } = props;
   const classes = useStyles();
   const [pokemonData, setPokemonData] = useState({});
+  const [filter, setFilter] = useState({})
+
+  const handleChange = (e) => {
+    setFilter(e.target.value)
+  }
 
   useEffect(() => {
     axios
@@ -92,14 +97,17 @@ const Pokedex = (props) => {
               className={classes.searchInput}
               label="Pokemon"
               variant="standard"
+              onChange={handleChange}
             />
           </div>
         </Toolbar>
       </AppBar>
       {pokemonData ? (
         <Grid container spacing={2} className={classes.pokedexContainer}>
-          {Object.keys(pokemonData).map((pokemonId) =>
-            getPokemonCard(pokemonId)
+          {Object.keys(pokemonData).map(
+            (pokemonId) =>
+              pokemonData[pokemonId].name.includes(filter) &&
+              getPokemonCard(pokemonId)
           )}
         </Grid>
       ) : (
