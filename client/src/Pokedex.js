@@ -1,10 +1,12 @@
 import React from "react";
-import { AppBar, Toolbar, Grid, Card, CardMedia, CardContent, Typography } from "@material-ui/core";
-import { makeStyles } from '@material-ui/core/styles'
+import { AppBar, Toolbar, Grid, Card, CardMedia, CardContent, Typography, TextField } from "@material-ui/core";
+import { makeStyles, alpha } from '@material-ui/core/styles'
 import { useState, useEffect } from "react";
 import { CircularProgress } from "material-ui";
 import { toFirstCharUppercase } from "./constants";
+import SearchIcon from '@mui/icons-material/Search';
 import axios from 'axios';
+
 
 const useStyles = makeStyles({
   pokedexContainer: {
@@ -17,7 +19,22 @@ const useStyles = makeStyles({
   },
   cardContent: {
     textAlign: "center",
-  }
+  },
+  searchContainer: {
+    display: 'flex',
+    paddingLeft: "20px",
+    paddingRight: "20px",
+    marginTop: "5px",
+    marginBottom: "5px",
+  },
+  searchIcon: {
+    alignSelf: "flex-end",
+    marginBottom: "5px",
+  },
+  searchInput: {
+    width: "200px",
+    margin: "5px",
+  },
 })
 
 
@@ -68,7 +85,16 @@ const Pokedex = (props) => {
   return (
     <>
       <AppBar position="static">
-        <Toolbar />
+        <Toolbar>
+          <div className={classes.searchContainer}>
+            <SearchIcon className={classes.searchIcon} />
+            <TextField
+              className={classes.searchInput}
+              label="Pokemon"
+              variant="standard"
+            />
+          </div>
+        </Toolbar>
       </AppBar>
       {pokemonData ? (
         <Grid container spacing={2} className={classes.pokedexContainer}>
