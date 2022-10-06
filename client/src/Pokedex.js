@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Grid, Card, CardMedia, CardContent, Typography, TextField } from "@material-ui/core";
-import { makeStyles, alpha } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import { useState, useEffect } from "react";
 import { CircularProgress } from "material-ui";
 import { toFirstCharUppercase } from "./constants";
@@ -42,7 +42,7 @@ const Pokedex = (props) => {
   const { history } = props;
   const classes = useStyles();
   const [pokemonData, setPokemonData] = useState({});
-  const [filter, setFilter] = useState({})
+  const [filter, setFilter] = useState("")
 
   const handleChange = (e) => {
     setFilter(e.target.value)
@@ -59,8 +59,7 @@ const Pokedex = (props) => {
           newPokemonData[index + 1] = {
             id: index + 1,
             name: pokemon.name,
-            sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1
-              }.png`
+            sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${index + 1}.png`
           };
         })
         setPokemonData(newPokemonData);
@@ -72,12 +71,12 @@ const Pokedex = (props) => {
     const { id, name, sprite } = pokemonData[`${pokemonId}`]
 
     return (
-      <Grid item xs={4} sm={4} key={pokemonId}>
+      <Grid item xs={4} key={pokemonId}>
         <Card onClick={() => history.push(`/${pokemonId}`)}>
           <CardMedia
-            className={classes.CardMedia}
+            className={classes.cardMedia}
             image={sprite}
-            style={{ widht: "130px", height: "130px" }}
+            style={{ width: "130px", height: "130px" }}
           />
           <CardContent className={classes.cardContent}>
             <Typography>{`${id}. ${toFirstCharUppercase(name)}`}</Typography>
