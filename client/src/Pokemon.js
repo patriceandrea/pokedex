@@ -28,27 +28,29 @@ const Pokemon = ({ match, history }) => {
     return (
       <>
 
-        <Typography variant="h1">
+        <Typography variant="h1" style={{ textAlign: "center", marginBottom: "1em" }}>
           {`${id}.`} {toFirstCharUppercase(name)}
           <img src={front_shiny} alt="" />
         </Typography>
-        <Card style={{ textAlign: "center", width: "50%", margin: "auto" }}>
+        <Card style={{ textAlign: "center", width: "40%", margin: "auto" }}>
           <img style={{ width: "300px", height: "300px" }} src={front_default} alt="" />
-          <Typography variant="h3">Pokemon Info</Typography>
+          <Typography variant="h4">Pokemon Info</Typography>
           <Typography>
             {"Species: "}
             <Link href={species.url}>{species.name}</Link>
           </Typography>
-          <Typography>Height: {height} </Typography>
-          <Typography>Weight: {weight} </Typography>
-          <Typography variant="h6"> Types:</Typography>
-          {
-            types.map((typeInfo) => {
-              const { type } = typeInfo;
-              const { name } = type;
-              return <Typography key={name}>{`${name}`}</Typography>
-            })
-          }
+          <Typography variant="h6" >Height: {height} </Typography>
+          <Typography variant="h6">Weight: {weight} </Typography>
+          <div className='type' >
+            <Typography variant="h6"> Types: </Typography>
+            {
+              types.map((typeInfo) => {
+                const { type } = typeInfo;
+                const { name } = type;
+                return <Typography key={name} variant="h6" >{`${name}`}</Typography>
+              })
+            }
+          </div>
         </Card>
       </>
     )
@@ -61,7 +63,7 @@ const Pokemon = ({ match, history }) => {
       {pokemon !== undefined && pokemon && generatePokemonJSX(pokemon)}
       {pokemon === false && <Typography> Pokemon Not Found </Typography>}
       {pokemon !== undefined &&
-        <Button variant="contained" onClick={() => history.push("/")}>
+        <Button variant="contained" onClick={() => history.push("/")} style={{ marginLeft: "50rem", marginTop: "2em" }}>
           Back To Pokedex
         </Button>
       }
