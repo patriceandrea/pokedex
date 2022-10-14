@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { Button, CircularProgress, Typography, Card } from '@material-ui/core';
 import { toFirstCharUppercase } from "./constants"
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 const Pokemon = ({ match, history }) => {
@@ -16,13 +15,11 @@ const Pokemon = ({ match, history }) => {
       .then(function (response) {
         const { data } = response;
         setPokemon(data);
-      }
-
-      )
-  })
+      })
+  });
 
   const generatePokemonJSX = () => {
-    const { name, id, species, height, weight, types, sprites } = pokemon;
+    const { name, id, height, weight, types, sprites } = pokemon;
     const { front_default, front_shiny } = sprites;
 
     return (
@@ -35,14 +32,11 @@ const Pokemon = ({ match, history }) => {
         <Card style={{ textAlign: "center", width: "40%", margin: "auto" }}>
           <img style={{ width: "300px", height: "300px" }} src={front_default} alt="" />
           <Typography variant="h4">Pokemon Info</Typography>
-          <Typography>
-            {"Species: "}
-            <Link href={species.url}>{species.name}</Link>
-          </Typography>
-          <Typography variant="h6" >Height: {height} </Typography>
-          <Typography variant="h6">Weight: {weight} </Typography>
+
+          <Typography variant="h5" style={{ fontWeight: 'bold' }}>Height: <Typography variant="h6">{height}</Typography></Typography>
+          <Typography variant="h5" style={{ fontWeight: 'bold' }}>Weight: <Typography variant="h6">{weight} </Typography></Typography>
           <div className='type' >
-            <Typography variant="h6"> Types: </Typography>
+            <Typography variant="h6" style={{ fontWeight: 'bold' }}> Types: </Typography>
             {
               types.map((typeInfo) => {
                 const { type } = typeInfo;
