@@ -1,5 +1,5 @@
 # Pokedex
-Pokedex App that list pokemons using React and Material-UI. 
+Pokedex App that list pokemons using React and Material-UI. You can also search for a pokemon on the Search Bar. 
 
 Pokemon Data was from PokeApi, a RESTful API. 
 
